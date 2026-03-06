@@ -1,42 +1,94 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* 전체 배경 */
+.app {
+  background-color: #0f0f1e;
+  min-height: 100vh;
+  padding: 40px 20px; /* ← 위아래 40px, 좌우 20px 여백 */
+}
+
+/* 제목 */
+.app-title {
+  color: #ffffff;
   text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Grid */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 24px; /* ← 카드 사이 간격 */
+  max-width: 1200px;
+  margin: 0 auto; /* 가운데 정렬 */
+  padding: 0 20px; /* ← 좌우 여백 추가 */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* 어두운 배경 (클릭하면 닫히게도 할 수 있어요) */
+.detail-backdrop {
+  position: fixed; /* 화면에 고정 */
+  inset: 0; /* top/right/bottom/left 전부 0 */
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* 카드 목록 위에 표시 */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* 상세 카드 박스 */
+.detail-card {
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 30px;
+  width: 90%;
+  max-width: 780px;
+  max-height: 85vh;
+  overflow-y: auto; /* 내용 길면 스크롤 */
+  color: #fff;
 }
 
-.card {
-  padding: 2em;
+/* 포스터 + 텍스트 나란히 (Flexbox) */
+.detail-content {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+  flex-wrap: wrap; /* 모바일에서 세로로 쌓임 */
 }
 
-.read-the-docs {
-  color: #888;
+.detail-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.detail-info h2 {
+  margin: 0 0 12px 0;
+  font-size: 1.5rem;
+}
+
+.detail-info p {
+  color: #ccc;
+  margin: 6px 0;
+  font-size: 0.9rem;
+}
+
+/* 장르 태그들 */
+.detail-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.genre-tag {
+  background: #2a2a4a;
+  color: #aaa;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+/* 줄거리 */
+.detail-overview {
+  line-height: 1.8;
+  color: #ccc;
+  font-size: 0.9rem;
 }

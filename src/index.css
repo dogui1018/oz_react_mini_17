@@ -1,68 +1,194 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/* ── 브라우저 기본값 초기화 ── */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* padding이 width에 포함되게 */
+}
+
+/* ── 전체 body 배경 ── */
+body {
+  background-color: #0f0f1e;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #ffffff;
+}
+
+/* ── 앱 전체 감싸는 박스 ── */
+.app {
+  background-color: #0f0f1e;
+  min-height: 100vh; /* 화면 전체 높이 채우기 */
+  padding: 40px 20px; /* 위아래 40px, 좌우 20px 여백 */
+}
+
+/* ── 페이지 제목 ── */
+.app-title {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+}
+
+/* ── 영화 카드 Grid 컨테이너 ── */
+.movie-grid {
+  display: grid;
+
+  /* auto-fill  : 화면 너비에 따라 열 개수 자동 계산
+     minmax     : 카드 최소 160px, 최대 1fr(균등 분배) */
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+
+  gap: 24px; /* 카드 사이 간격 */
+  max-width: 1200px;
+  margin: 0 auto; /* 가운데 정렬 */
+  padding: 0 20px; /* 좌우 여백 */
+}
+
+/* ── 상세 페이지 레이아웃 ── */
+
+/* 포스터 + 텍스트 나란히 (Flexbox) */
+.detail-content {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  gap: 40px;
+  margin-top: 20px;
+  flex-wrap: wrap; /* 모바일에서 세로로 쌓임 */
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.detail-info {
+  flex: 1;
+  min-width: 200px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.detail-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.detail-info p {
+  color: #cccccc;
+  margin: 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ── 장르 태그 ── */
+.detail-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.genre-tag {
+  background: #2a2a4a;
+  color: #aaaaaa;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+/* ── 줄거리 ── */
+.detail-overview {
+  line-height: 1.8 !important;
+  color: #cccccc;
+  font-size: 0.95rem;
+  margin-top: 16px !important;
+}
+
+/* ── 뒤로가기 버튼 ── */
+.back-button {
+  background: none;
+  border: 1px solid #2a2a4a;
+  color: #aaaaaa;
+  padding: 8px 20px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  font-size: 0.9rem;
+  margin: 20px;
+  transition: all 0.2s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.back-button:hover {
+  border-color: #e94560;
+  color: #ffffff;
+}
+
+/* ── NavBar ── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 로고 / 검색창 / 버튼 균등 배치 */
+  padding: 0 40px;
+  height: 64px;
+  background-color: #0f0f1e;
+  border-bottom: 1px solid #1a1a2e;
+  position: sticky; /* 스크롤해도 상단에 고정 */
+  top: 0;
+  z-index: 100;
+}
+
+/* 로고 */
+.navbar__logo {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* 검색창 */
+.navbar__search {
+  flex: 1; /* 남은 공간 다 차지 */
+  margin: 0 40px; /* 로고와 버튼 사이 여백 */
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #2a2a4a;
+  background-color: #1a1a2e;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.navbar__search::placeholder {
+  color: #aaaaaa;
+}
+
+.navbar__search:focus {
+  border-color: #e94560; /* 포커스 시 빨간색 테두리 */
+}
+
+/* 버튼 묶음 */
+.navbar__auth {
+  display: flex;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+/* 버튼 공통 */
+.navbar__btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+.navbar__btn:hover {
+  opacity: 0.8;
+}
+
+/* 로그인 버튼 */
+.navbar__btn--login {
+  background: none;
+  border: 1px solid #aaaaaa;
+  color: #aaaaaa;
+}
+
+/* 회원가입 버튼 */
+.navbar__btn--signup {
+  background-color: #e94560;
+  color: #ffffff;
 }
