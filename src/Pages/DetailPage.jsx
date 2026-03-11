@@ -28,41 +28,54 @@ function DetailPage() {
 
   if (loading) {
     return (
-      <div style={{ color: "#fff", textAlign: "center", padding: "60px" }}>
-        불러오는 중...
+      <div className="bg-gray-950 min-h-screen flex items-center justify-center">
+        <p className="text-gray-400 text-lg">불러오는 중...</p>
       </div>
     );
   }
 
   return (
-    <div className="app">
+    <div className="bg-gray-950 min-h-screen py-10 px-5">
       {/* 뒤로가기 버튼 */}
-      <button onClick={() => navigate(-1)}>← 목록으로</button>
+      <button
+        onClick={() => navigate(-1)}
+        className="ml-5 px-5 py-2 rounded-md text-sm text-gray-400 border border-gray-700 bg-transparent cursor-pointer hover:border-red-500 hover:text-white transition-all"
+      >
+        ← 목록으로
+      </button>
 
       {/* 포스터 + 정보 */}
-      <div className="detail-content">
+      <div className="flex gap-10 flex-wrap max-w-5xl mx-auto mt-10 px-5">
         <img
           src={"https://image.tmdb.org/t/p/w300" + movie.poster_path}
           alt={movie.title}
+          className="rounded-xl w-64 flex-shrink-0 shadow-2xl"
         />
 
-        <div className="detail-info">
-          <h2>{movie.title}</h2>
-          <p>⭐ {movie.vote_average.toFixed(1)}</p>
-          <p>📅 {movie.release_date}</p>
-          <p>⏱ {movie.runtime}분</p>
+        <div className="flex-1 min-w-52">
+          <h2 className="text-white text-3xl font-bold mb-4">{movie.title}</h2>
+          <p className="text-gray-300 my-2 text-sm">
+            ⭐ {movie.vote_average.toFixed(1)}
+          </p>
+          <p className="text-gray-300 my-2 text-sm">📅 {movie.release_date}</p>
+          <p className="text-gray-300 my-2 text-sm">⏱ {movie.runtime}분</p>
 
           {/* 장르 태그 */}
-          <div className="detail-genres">
+          <div className="flex flex-wrap gap-2 my-4">
             {movie.genres.map((genre) => (
-              <span key={genre.id} className="genre-tag">
+              <span
+                key={genre.id}
+                className="bg-gray-800 text-gray-400 px-3 py-1 rounded-full text-xs"
+              >
                 {genre.name}
               </span>
             ))}
           </div>
 
           {/* 줄거리 */}
-          <p className="detail-overview">{movie.overview}</p>
+          <p className="text-gray-300 text-sm leading-7 mt-4">
+            {movie.overview}
+          </p>
         </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
-import "../App.css";
 
 const TOKEN = import.meta.env.VITE_TMDB_TOKEN;
 console.log("토큰 확인:", TOKEN);
@@ -28,17 +27,51 @@ function HomePage() {
 
   if (loading) {
     return (
-      <div style={{ color: "#fff", textAlign: "center", padding: "60px" }}>
-        불러오는 중...
+      <div className="min-h-screen bg-[#0a0e1a] flex items-center justify-center">
+        <div className="text-center">
+          {/* 로딩 스피너 */}
+          <div className="w-12 h-12 border-4 border-red-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-400 text-sm">불러오는 중...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="app">
-      <h1 className="app-title">🎬 OZ movie</h1>
+    <div className="min-h-screen bg-[#0a0e1a] px-4 md:px-8 lg:px-12 py-8 md:py-12">
+      {/* 타이틀 영역 */}
+      <div className="text-center mb-8 md:mb-12">
+        <h1
+          className="
+          text-2xl md:text-4xl lg:text-5xl
+          font-extrabold text-white mb-2 md:mb-3
+        "
+        >
+          🎬 인기 영화
+        </h1>
+        <p className="text-gray-400 text-xs md:text-base">
+          지금 가장 인기있는 영화들을 만나보세요
+        </p>
+      </div>
 
-      <div className="movie-grid">
+      {/* 영화 그리드
+          모바일  : 2열
+          태블릿  : 3열
+          데스크탑: 5열
+          큰화면  : 6열
+      */}
+      <div
+        className="
+        grid
+        grid-cols-2
+        sm:grid-cols-3
+        md:grid-cols-4
+        lg:grid-cols-5
+        xl:grid-cols-6
+        gap-3 md:gap-5
+        max-w-7xl mx-auto
+      "
+      >
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
